@@ -3,6 +3,12 @@
 ```
 ulimit -c unlimited
 ```
+## Checksec
+```
+exe = './test'
+elf = context.binary = ELF(exe, checksec=True)
+context.log_level = 'debug'
+```
 ## RIP Offset 
 ```
 def findoffset():
@@ -15,3 +21,8 @@ def findoffset():
     info('located EIP/RIP offset at {a}'.format(a=ip_offset))
     return ip_offset
 ```
+## Function Address
+```
+info(hex(elf.symbols['gg']))
+```
+
