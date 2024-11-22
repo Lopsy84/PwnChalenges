@@ -9,15 +9,15 @@ exe = './test'
 elf = context.binary = ELF(exe, checksec=True)
 context.log_level = 'debug'
 ```
-## RIP Offset 
+## EIP/RIP offset 
 ```
-def findoffset():
-    #of=process('./test', stdin=PTY, stdout=PTY, stderr=PTY)
-    of=process('./test')
-    of.sendlineafter(':', cyclic(300))
-    of.wait()
+def findoffset(path,size,after):
+    #target=process(path, stdin=PTY, stdout=PTY, stderr=PTY)
+    target=process(path)
+    target.sendlineafter(after, cyclic(size))
+    target.wait()
     # ip_offset = cyclic_find(p.corefile.pc)  # x86
-    ip_offset = cyclic_find(of.corefile.read(of.corefile.sp, 4)) # x64
+    ip_offset = cyclic_find(target.corefile.read(target.corefile.sp, 4)) # x64
     info('located EIP/RIP offset at {a}'.format(a=ip_offset))
     return ip_offset
 ```
