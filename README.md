@@ -2,6 +2,7 @@
 ## Coredump
 ```
 ulimit -c unlimited
+echo '/tmp/core.%e.%p' | sudo tee /proc/sys/kernel/core_pattern
 ```
 ## Checksec
 ```
