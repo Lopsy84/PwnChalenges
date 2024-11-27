@@ -18,7 +18,7 @@ def findoffset(path,size,after):
     target.sendlineafter(after, cyclic(size))
     target.wait()
     # ip_offset = cyclic_find(p.corefile.pc)  # x86
-    ip_offset = cyclic_find(target.corefile.read(target.corefile.sp, 4)) # x64
+    ip_offset = cyclic_find(target.corefile.rbp)+8 # x64
     info('located EIP/RIP offset at {a}'.format(a=ip_offset))
     return ip_offset
 ```
